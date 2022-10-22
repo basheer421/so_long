@@ -6,7 +6,7 @@
 /*   By: bammar <bammar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 19:16:40 by bammar            #+#    #+#             */
-/*   Updated: 2022/10/22 15:30:41 by bammar           ###   ########.fr       */
+/*   Updated: 2022/10/22 19:04:23 by bammar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_image_vars	*image_load(t_mlx_vars *mlx_vars)
 	image_vars->block[1] = mlx_xpm_file_to_image(mlx_vars->mlx_ptr,
 			"assets/block4_64x64.xpm", &length, &length);
 	image_vars->rat = mlx_xpm_file_to_image(mlx_vars->mlx_ptr,
-			"assets/rat/tile001.xpm", &length, &length);
+			"assets/tile001.xpm", &length, &length);
 	image_vars->cheese = mlx_xpm_file_to_image(mlx_vars->mlx_ptr,
 			"assets/cheese.xpm", &length, &length);
 	image_vars->exit = mlx_xpm_file_to_image(mlx_vars->mlx_ptr,
