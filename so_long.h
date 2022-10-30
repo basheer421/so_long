@@ -6,7 +6,7 @@
 /*   By: bammar <bammar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 20:04:36 by bammar            #+#    #+#             */
-/*   Updated: 2022/10/22 17:57:40 by bammar           ###   ########.fr       */
+/*   Updated: 2022/10/30 19:12:39 by bammar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ typedef struct s_mlx_vars
 
 typedef struct s_image_vars
 {
-	void			*block[2];
-	void			*rat;
+	void			*block;
 	void			*wall;
+	void			*rat;
 	void			*exit;
 	void			*cheese;
 }					t_image_vars;
@@ -89,7 +89,7 @@ int					map_draw(t_mlx_vars *mlx_vars, t_map *map,
 						t_image_vars *image_vars);
 int					valid_path(t_map *map, t_index *index, int *visited,
 						char end);
-t_image_vars		*image_load(t_mlx_vars *mlx_vars);
+void				image_load(t_mlx_vars *mlx_vars, t_image_vars *image_vars);
 t_index				*new_index(int x, int y);
 int					safe_index(t_map *map, t_index *index);
 char				*read_file(int fd);

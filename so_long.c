@@ -6,7 +6,7 @@
 /*   By: bammar <bammar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 20:55:34 by bammar            #+#    #+#             */
-/*   Updated: 2022/10/22 18:40:50 by bammar           ###   ########.fr       */
+/*   Updated: 2022/10/30 19:16:35 by bammar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ int	sl_exit(t_hook_vars *hook_vars)
 		hook_vars->mlx_vars->win_ptr);
 	mlx_destroy_window(hook_vars->mlx_vars->mlx_ptr,
 		hook_vars->mlx_vars->win_ptr);
+	mlx_destroy_image(hook_vars->mlx_vars->mlx_ptr,
+		hook_vars->image_vars->block);
+	mlx_destroy_image(hook_vars->mlx_vars->mlx_ptr,
+		hook_vars->image_vars->wall);
+	mlx_destroy_image(hook_vars->mlx_vars->mlx_ptr, hook_vars->image_vars->rat);
+	mlx_destroy_image(hook_vars->mlx_vars->mlx_ptr,
+		hook_vars->image_vars->cheese);
 	exit(0);
 }
 
@@ -64,8 +71,8 @@ int	key_hook(int keycode, t_hook_vars *hook_vars)
 	if (keycode == KEY_LEFT || keycode == KEY_A)
 		change_pos(hook_vars, -1, 0);
 	mlx_clear_window(hook_vars->mlx_vars->mlx_ptr,
-		hook_vars->mlx_vars->win_ptr);
-	hook_vars->image_vars = image_load(hook_vars->mlx_vars);
+						hook_vars->mlx_vars->win_ptr);
+	image_load(hook_vars->mlx_vars, hook_vars->image_vars);
 	map_draw(hook_vars->mlx_vars, hook_vars->map, hook_vars->image_vars);
 	return (0);
 }
@@ -73,7 +80,7 @@ int	key_hook(int keycode, t_hook_vars *hook_vars)
 int	main(int argc, char **argv)
 {
 	t_mlx_vars		mlx_vars;
-	t_image_vars	*image_vars;
+	t_image_vars	image_vars;
 	t_map			*map;
 	t_hook_vars		hook_vars;
 
@@ -88,10 +95,10 @@ int	main(int argc, char **argv)
 	mlx_vars.mlx_ptr = mlx_init();
 	mlx_vars.win_ptr = mlx_new_window(mlx_vars.mlx_ptr, map->width * 64,
 			map->height * 64, "Kitchen rat");
-	image_vars = image_load(&mlx_vars);
-	map_draw(&mlx_vars, map, image_vars);
+	image_load(&mlx_vars, &image_vars);
+	map_draw(&mlx_vars, map, &image_vars);
 	hook_vars.move_count = 0;
-	hook_vars.image_vars = image_vars;
+	hook_vars.image_vars = &image_vars;
 	hook_vars.mlx_vars = &mlx_vars;
 	mlx_hook(mlx_vars.win_ptr, ON_DESTROY, 0, sl_exit, &hook_vars);
 	mlx_key_hook(mlx_vars.win_ptr, key_hook, &(hook_vars));

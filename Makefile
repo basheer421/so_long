@@ -3,7 +3,7 @@ FILES = so_long.c sl_map_check.c sl_map_read.c sl_utils.c valid_path.c sl_map_dr
 EXC = so_long
 OBJS = $(FILES:.c=.o)
 CC = cc	
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror 
 
 all: $(NAME)
 
