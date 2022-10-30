@@ -6,7 +6,7 @@
 /*   By: bammar <bammar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 20:55:34 by bammar            #+#    #+#             */
-/*   Updated: 2022/10/30 19:16:35 by bammar           ###   ########.fr       */
+/*   Updated: 2022/10/30 19:29:13 by bammar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	key_hook(int keycode, t_hook_vars *hook_vars)
 	if (keycode == KEY_LEFT || keycode == KEY_A)
 		change_pos(hook_vars, -1, 0);
 	mlx_clear_window(hook_vars->mlx_vars->mlx_ptr,
-						hook_vars->mlx_vars->win_ptr);
+		hook_vars->mlx_vars->win_ptr);
 	image_load(hook_vars->mlx_vars, hook_vars->image_vars);
 	map_draw(hook_vars->mlx_vars, hook_vars->map, hook_vars->image_vars);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: bammar <bammar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:43:04 by bammar            #+#    #+#             */
-/*   Updated: 2022/10/22 15:45:35 by bammar           ###   ########.fr       */
+/*   Updated: 2022/10/30 19:26:57 by bammar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	map_draw(t_mlx_vars *mlx_vars, t_map *map, t_image_vars *image_vars)
 		while (width < map->width)
 		{
 			if (map->map[height][width] == '1')
-				put_image(mlx_vars, image_vars->block[1], height, width);
+				put_image(mlx_vars, image_vars->wall, height, width);
 			else
-				put_image(mlx_vars, image_vars->block[0], height, width);
+				put_image(mlx_vars, image_vars->block, height, width);
 			if (map->map[height][width] == 'E')
 				put_image(mlx_vars, image_vars->exit, height, width);
 			else if (map->map[height][width] == 'P')

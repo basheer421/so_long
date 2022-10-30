@@ -6,7 +6,7 @@
 /*   By: bammar <bammar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 23:15:27 by bammar            #+#    #+#             */
-/*   Updated: 2022/10/30 18:26:01 by bammar           ###   ########.fr       */
+/*   Updated: 2022/10/30 19:28:56 by bammar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char	*map_open(const char *map_path)
 {
-	int			fd;
-	char		*file;
+	int		fd;
+	char	*file;
 
 	if (ft_strncmp(map_path + ft_strlen(map_path) - 4, ".ber", 4) != 0)
 		return (perror("Error\nInvalid file name"), NULL);
@@ -23,7 +23,7 @@ static char	*map_open(const char *map_path)
 	if (fd < 0)
 		return (perror("Error\nInvalid file"), NULL);
 	file = read_file(fd);
-	if (!file)
+	if (!file || file[0] == '\n' || file[0] == '\0')
 		return (perror("Error\nInvalid file"), NULL);
 	close(fd);
 	return (file);
@@ -66,7 +66,7 @@ t_map	*map_read(char *map_path)
 	{
 		map->width = -1;
 		while (map->map[map->height][++map->width]
-				&& map->map[map->height][map->width] != '\n')
+			&& map->map[map->height][map->width] != '\n')
 		{
 			if (check_invalid_letter(map->map[map->height][map->width]))
 				return (perror("Error\nInvalid map"), NULL);
