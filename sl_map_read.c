@@ -6,7 +6,7 @@
 /*   By: bammar <bammar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 23:15:27 by bammar            #+#    #+#             */
-/*   Updated: 2022/10/22 16:17:13 by bammar           ###   ########.fr       */
+/*   Updated: 2022/10/30 18:26:01 by bammar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static t_map	*map_init(char *map_path)
 	if (!map)
 		return (NULL);
 	file = map_open(map_path);
-	free(file);
 	if (!file)
 		return (free(map), NULL);
 	map->map = ft_split(file, '\n');
+	free(file);
 	if (!map->map)
 		return (NULL);
 	return (map);
@@ -69,7 +69,7 @@ t_map	*map_read(char *map_path)
 				&& map->map[map->height][map->width] != '\n')
 		{
 			if (check_invalid_letter(map->map[map->height][map->width]))
-				return (NULL);
+				return (perror("Error\nInvalid map"), NULL);
 			if (map->map[map->height][map->width] == 'P')
 				map->player_pos = new_index(map->width, map->height);
 		}
