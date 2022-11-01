@@ -6,7 +6,7 @@
 /*   By: bammar <bammar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 20:55:34 by bammar            #+#    #+#             */
-/*   Updated: 2022/11/01 18:01:39 by bammar           ###   ########.fr       */
+/*   Updated: 2022/11/01 18:25:35 by bammar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,14 @@ static void	change_pos(t_hook_vars *hook_vars, int pathx, int pathy)
 		map->map[new_player_pos->y][new_player_pos->x] = 'P';
 		free(map->player_pos);
 		map->player_pos = new_player_pos;
+		ft_printf("Move count: %d\n", ++(hook_vars->move_count));
 	}
-	ft_printf("Move count: %d\n", ++(hook_vars->move_count));
 	if ((map->map[new_player_pos->y][new_player_pos->x] == 'E')
 		&& (map->map_vars->coin_count == 0))
+	{
+		ft_printf("Move count: %d\n", ++(hook_vars->move_count));
 		sl_exit(hook_vars);
+	}
 }
 
 int	key_hook(int keycode, t_hook_vars *hook_vars)
