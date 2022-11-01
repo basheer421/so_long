@@ -6,7 +6,7 @@
 /*   By: bammar <bammar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:22:24 by bammar            #+#    #+#             */
-/*   Updated: 2022/10/22 18:46:35 by bammar           ###   ########.fr       */
+/*   Updated: 2022/11/01 16:54:53 by bammar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	map_check(t_map *map)
 	t_index		*index;
 	t_map_vars	*map_vars;
 
-	if (!map || map->height > 8 || map->width > 27)
+	if (!map || map->height > 10 || map->width > 35)
 		return (perror("Error\nInvalid map (Too big for screen)"), 1);
 	map_vars = new_map_vars();
 	if (!map_vars)
@@ -87,11 +87,12 @@ int	map_check(t_map *map)
 		while (++index->x < map->width)
 			if (invalid_boarder(map, index) || invalid_var_count(map, index,
 					map_vars) || invalid_path(map, index))
-				return (1);
+				return (free(index), free(map_vars), 1);
 	}
 	free(index);
 	if (map_vars->exit_count != 1 || map_vars->player_count != 1)
-		return (free(map_vars), perror("Error\nMap variable error"), 1);
+		return (free(map_vars),
+			perror("Error\nMap variable error"), 1);
 	map->map_vars = map_vars;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bammar <bammar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 23:15:27 by bammar            #+#    #+#             */
-/*   Updated: 2022/10/30 19:28:56 by bammar           ###   ########.fr       */
+/*   Updated: 2022/11/01 17:53:55 by bammar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ static char	*map_open(const char *map_path)
 	if (fd < 0)
 		return (perror("Error\nInvalid file"), NULL);
 	file = read_file(fd);
-	if (!file || file[0] == '\n' || file[0] == '\0')
+	if (!file)
 		return (perror("Error\nInvalid file"), NULL);
+	if (file[0] == '\n' || file[0] == '\0')
+		return (perror("Error\nInvalid file"), free(file), NULL);
 	close(fd);
 	return (file);
 }
@@ -44,14 +46,17 @@ static t_map	*map_init(char *map_path)
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
+	map->height = 0;
+	map->player_pos = 0;
+	map->width = 0;
+	map->map_vars = 0;
 	file = map_open(map_path);
 	if (!file)
 		return (free(map), NULL);
 	map->map = ft_split(file, '\n');
-	free(file);
 	if (!map->map)
-		return (NULL);
-	return (map);
+		return (free(file), NULL);
+	return (free(file), map);
 }
 
 t_map	*map_read(char *map_path)
@@ -69,7 +74,7 @@ t_map	*map_read(char *map_path)
 			&& map->map[map->height][map->width] != '\n')
 		{
 			if (check_invalid_letter(map->map[map->height][map->width]))
-				return (perror("Error\nInvalid map"), NULL);
+				return (perror("Error\nInvalid map"), map_free(map), NULL);
 			if (map->map[map->height][map->width] == 'P')
 				map->player_pos = new_index(map->width, map->height);
 		}
@@ -88,9 +93,9 @@ void	map_free(t_map *map)
 		free(map->map[i]);
 	if (map->map)
 		free(map->map);
-	if (map->map_vars)
-		free(map->map_vars);
 	if (map->player_pos)
 		free(map->player_pos);
+	if (map->map_vars)
+		free(map->map_vars);
 	free(map);
 }
