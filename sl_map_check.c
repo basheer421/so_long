@@ -6,7 +6,7 @@
 /*   By: bammar <bammar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:22:24 by bammar            #+#    #+#             */
-/*   Updated: 2022/11/01 16:54:53 by bammar           ###   ########.fr       */
+/*   Updated: 2022/11/01 18:37:50 by bammar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	map_check(t_map *map)
 	t_index		*index;
 	t_map_vars	*map_vars;
 
-	if (!map || map->height > 10 || map->width > 35)
+	if (!map || map->height > 15 || map->width > 36)
 		return (perror("Error\nInvalid map (Too big for screen)"), 1);
 	map_vars = new_map_vars();
 	if (!map_vars)
