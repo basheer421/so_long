@@ -10,11 +10,13 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	(cd libft && make)
 	(cd ft_printf && make)
+	(cd minilibx && make)
 	$(CC) $(CFLAGS) $(OBJS) libft/libft.a ft_printf/libftprintf.a -Lminilibx -lmlx -framework OpenGL -framework AppKit -o $(EXC)
 
 clean:
 	(cd libft && make clean)
 	(cd ft_printf && make clean)
+	(cd minilibx && make clean)
 	rm -f $(OBJS)
 
 fclean: clean
